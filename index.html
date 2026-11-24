@@ -4,137 +4,130 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="在 3D 三里屯街区地图上带狗逛街、收集友好印章的互动小游戏。">
-<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>带它逛三里屯</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: one reading column (~36em) for the essay; the game breaks out wider, map + side panel that stacks on phones. */
+/* Hallmark · v2.0.0 · redesign: full · scope: page (a game screen) · genre: playful · theme: brand, the illustration palette the user chose (sky teal, navy ink, cream paper, coral seals) · signature: the 3D Sanlitun diorama, playable on the first screen · shape: Stage, map left and a passport right · nav: none · footer: one line of terms */
+/* Critique: the old chrome was grey paper and four white cards that ignored the illustrated map; now the page sits in the map's sky and the side panel is one passport with perforated rows, stamps as seals. */
+/* Hallmark · waive 77 · the page is one playable stage with no sections to add · a game screen, not a landing strip */
+/* Hallmark · waive 78 · the 26px head is the passport panel title beside the map, not a page section · a section-size head would crowd the side panel */
+/* Hallmark · reworded "状态" to "逛街护照" · the four status cards became one passport panel */
+/* Hallmark · kept "地图依据三里屯街区……" disclaimer verbatim (terms are never reworded) */
+
+/* Layout: one capped stage. Title on the sky, the diorama beside a passport panel; stacks on phones. */
 :root{
-  --paper:#F2F4F1; --ink:#1C2320; --muted:#5B6862; --line:#D3DAD5; --panel:#FFFFFF;
-  --accent:#2F49D1; --tag:#F0B400;
-  --ok:#2E8B57; --warn:#C98A00; --no:#C8432F;
-  --road:#C6CCC8; --walk:#E7EBE7; --grass:#B5D49A; --water:#A3CBE8;
-  --b1:#D9C7B4; --b2:#BFC9D6; --b3:#CDBFD3; --b4:#C9D3BF; --bink:#3B4440;
-  --serif:"Noto Serif SC","Songti SC","STSong",serif;
-  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme: light;
+  --sky:#8CCBC7; --sky-deep:#73B7B3;
+  --paper:#FFF6E8; --paper-deep:#F4E6CE; --line:#E3D2B6;
+  --ink:#2B3463; --ink-soft:#4C5276;
+  --coral:#E8604A; --coral-deep:#B8432F;
+  --lav:#E6E0F4;
+  --ok:#2F7D4A; --warn:#A86A00; --no:#C2412F;
+  --on-chip:#FFF6E8;
+  --focus:#2B3463;
+  --display:"ZCOOL KuaiLe","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --figure:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r-outer:16px; --r-inner:8px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#131816; --ink:#E6EBE8; --muted:#9AA6A0; --line:#2C3531; --panel:#1B211F;
-  --accent:#8C9EFF; --tag:#F5C542; --ok:#5CC28A; --warn:#E3AE2E; --no:#F0735E;
-  --road:#2B312E; --walk:#1F2522; --grass:#38512F; --water:#284A61;
-  --b1:#5A4E43; --b2:#45505C; --b3:#52465A; --b4:#46523F; --bink:#E6EBE8; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#131816; --ink:#E6EBE8; --muted:#9AA6A0; --line:#2C3531; --panel:#1B211F;
-  --accent:#8C9EFF; --tag:#F5C542; --ok:#5CC28A; --warn:#E3AE2E; --no:#F0735E;
-  --road:#2B312E; --walk:#1F2522; --grass:#38512F; --water:#284A61;
-  --b1:#5A4E43; --b2:#45505C; --b3:#52465A; --b4:#46523F; --bink:#E6EBE8; color-scheme:dark}
+html,body{overflow-x:clip}
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--sky);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:var(--s8) var(--s10)}
+[hidden]{display:none!important}
+.page{max-width:1200px;margin:0 auto;display:grid;gap:var(--s6)}
+.top{display:grid;gap:var(--s1)}
+h1,h2,h3{margin:0;font-weight:400;line-height:1.2;text-wrap:balance;overflow-wrap:break-word;min-width:0}
+h1{font-family:var(--display);font-size:clamp(40px,6vw,64px);color:var(--ink)}
+.top p{margin:0;font-size:18px;color:var(--ink)}
 
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 80px}
-.col{max-width:36em;margin:0 auto}
-.wide{max-width:1000px;margin:0 auto}
-h1,h2,h3{font-family:var(--serif);text-wrap:balance;line-height:1.3;margin:0}
-.eyebrow{font-size:13px;letter-spacing:.14em;color:var(--muted);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.eyebrow b{background:var(--tag);color:#1C2320;padding:2px 8px;border-radius:3px;letter-spacing:.08em;font-weight:700}
-header{display:grid;gap:20px;padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:32px}
-h1{font-size:clamp(34px,7vw,58px);font-weight:900;letter-spacing:-.01em}
-h1 span{color:var(--accent)}
-.dek{font-size:19px;color:var(--muted);margin:0;line-height:1.7}
-.byline{font-size:13px;color:var(--muted);font-family:var(--mono)}
-article p{margin:0 0 1.1em}
-article h2{font-size:26px;font-weight:900;margin:2.2em 0 .8em;display:flex;gap:.5em;align-items:baseline}
-article h2 .n{font-family:var(--mono);font-size:14px;color:var(--accent);font-weight:500;letter-spacing:.05em}
-article h3{font-size:19px;font-weight:600;margin:1.6em 0 .5em}
-.stat{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline;border-left:3px solid var(--tag);padding:6px 0 6px 18px;margin:1.4em 0}
-.stat .big{font-family:var(--serif);font-weight:900;font-size:44px;line-height:1;grid-row:span 2}
-.stat .src{font-size:13px;color:var(--muted)}
-.claim{margin:1.8em 0 1.2em;padding:20px 22px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
-.claim h3{margin:0 0 .5em;font-size:21px}
-.claim .k{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:6px}
-.claim p:last-child{margin-bottom:0}
-ul.list{padding-left:1.2em;margin:0 0 1.2em}
-ul.list li{margin-bottom:.5em}
-.pull{font-family:var(--serif);font-weight:900;font-size:24px;line-height:1.5;margin:1.6em 0;padding:0 0 0 0;color:var(--ink)}
-.pull::before{content:"“";color:var(--tag);margin-right:2px}
-.pull::after{content:"”";color:var(--tag)}
-
-/* ---------- game ---------- */
-#game{margin-top:0;padding-top:0}
-#game .head{display:grid;gap:10px;margin-bottom:20px}
-#game h2{font-size:30px;font-weight:900}
-#game .head p{margin:0;color:var(--muted);max-width:40em}
-.stage{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:18px;align-items:start}
-@media (max-width:820px){.stage{grid-template-columns:minmax(0,1fr)}}
-.mapwrap{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#8CCBC7;min-width:0}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:var(--s5);align-items:start}
+@media (max-width:860px){.stage{grid-template-columns:minmax(0,1fr)}}
+.mapcol{display:grid;gap:var(--s3);min-width:0}
+.mapwrap{position:relative;border:2px solid var(--ink);border-radius:var(--r-outer);overflow:hidden;background:var(--sky-deep);box-shadow:4px 4px 0 var(--ink);min-width:0}
 .mapwrap::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .45  0 0 0 0 .4  0 0 0 .9 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
 canvas{display:block;width:100%;touch-action:none;outline:none}
-canvas:focus-visible{box-shadow:inset 0 0 0 3px var(--accent)}
-.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:color-mix(in srgb,var(--paper) 72%,transparent)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px;max-width:360px;width:100%;display:grid;gap:14px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
-.card h3{font-size:20px}
-.card p{margin:0;font-size:14px;line-height:1.7;color:var(--muted)}
-.pick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.pick label{border:1px solid var(--line);border-radius:6px;padding:10px;cursor:pointer;font-size:14px;line-height:1.5;display:grid;gap:2px}
-.pick label small{color:var(--muted);font-size:12px}
+canvas:focus-visible{box-shadow:inset 0 0 0 4px var(--focus)}
+.fallback{margin:0;padding:var(--s6);color:var(--ink)}
+.overlay{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;padding:var(--s4);background:color-mix(in srgb,var(--sky) 55%,transparent)}
+.card{background:var(--paper);color:var(--ink);border:2px solid var(--ink);border-radius:var(--r-inner);padding:var(--s5);max-width:380px;width:100%;display:grid;gap:var(--s4)}
+.card h2,.card h3{font-family:var(--display);font-size:28px}
+.card p{margin:0;font-size:15px;line-height:1.7;color:var(--ink-soft)}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2)}
+.pick label{position:relative;border:2px solid var(--line);border-radius:var(--r-inner);padding:var(--s3);cursor:pointer;font-size:15px;line-height:1.5;display:grid;gap:var(--s1);background:var(--paper);transition:border-color .15s,background-color .15s}
+.pick label small{color:var(--ink-soft);font-size:13px}
 .pick input{position:absolute;opacity:0;pointer-events:none}
-.pick label:has(input:checked){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
-.pick label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
-button{font-family:var(--sans);font-size:15px;font-weight:700;border-radius:6px;border:0;cursor:pointer}
-.go{background:var(--accent);color:#fff;padding:11px 16px}
-:root[data-theme="dark"] .go{color:#10142A}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .go{color:#10142A}}
-button:focus-visible{outline:2px solid var(--tag);outline-offset:2px}
-.side{display:grid;gap:14px;min-width:0}
-.box{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;gap:10px}
-.box h4{margin:0;font-size:12px;letter-spacing:.12em;color:var(--muted);font-weight:500}
-.meter{display:grid;grid-template-columns:3em 1fr 2.6em;gap:8px;align-items:center;font-size:14px}
-.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--ok);transition:width .25s}
-.meter .v{font-family:var(--mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
-.stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-.stamp{aspect-ratio:1;max-width:100%;border:1.5px dashed var(--line);border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:17px;color:var(--muted);transition:all .2s}
-.stamp.on{border:2px solid var(--accent);background:var(--accent);color:var(--panel);transform:rotate(-8deg)}
-.stampnames{font-size:12px;color:var(--muted);line-height:1.6}
-.log{font-size:14px;line-height:1.65;min-height:4.8em}
-.log .t{color:var(--muted);font-size:12px;font-family:var(--mono)}
-.legend{display:grid;gap:6px;font-size:13px}
-.legend span{display:flex;gap:8px;align-items:center}
-.sq{width:18px;height:18px;border-radius:3px;display:inline-grid;place-items:center;color:#fff;font-size:11px;font-weight:700;flex:none}
-.pad{display:none;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(2,46px);gap:6px;justify-content:center}
-.pad button{background:var(--panel);border:1px solid var(--line);color:var(--ink);font-size:18px}
+.pick label:hover{border-color:var(--ink-soft)}
+.pick label:has(input:checked){border-color:var(--ink);background:var(--lav)}
+.pick label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:2px}
+button{font-family:var(--body);font-size:16px;font-weight:700;border-radius:var(--r-inner);border:2px solid var(--ink);cursor:pointer;transition:transform .12s,background-color .15s}
+button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;transition:none}
+button:active{transform:translateY(1px) scale(.98)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.go{background:var(--ink);color:var(--paper);padding:var(--s3) var(--s4)}
+.go:hover{background:var(--ink-soft)}
+.ghost{background:var(--paper);color:var(--ink);padding:var(--s3) var(--s4)}
+.ghost:hover{background:var(--paper-deep)}
+.result .score{font-family:var(--figure);font-size:40px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.result .score small{font-family:var(--body);font-size:15px;color:var(--ink-soft);margin-left:var(--s2)}
+.result p{color:var(--ink)}
+.row{display:flex;gap:var(--s2);flex-wrap:wrap}
+
+.pad{display:none;grid-template-columns:repeat(3,56px);grid-template-rows:repeat(2,48px);gap:var(--s2);justify-content:center}
+.pad button{background:var(--paper);color:var(--ink);display:grid;place-items:center;padding:0}
+.pad button:hover{background:var(--paper-deep)}
+.pad svg{width:20px;height:20px}
 .pad .u{grid-column:2}
 .pad .l{grid-column:1;grid-row:2}.pad .d{grid-column:2;grid-row:2}.pad .r{grid-column:3;grid-row:2}
-@media (pointer:coarse),(max-width:820px){.pad{display:grid}}
-.note{font-size:13px;color:var(--muted);margin-top:14px;line-height:1.7}
-.result p{color:var(--ink)}
-.result .score{font-family:var(--serif);font-weight:900;font-size:40px;line-height:1;color:var(--ink)}
-.result .score small{font-size:15px;color:var(--muted);font-family:var(--sans);font-weight:400;margin-left:6px}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);padding:10px 14px}
-footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-[hidden]{display:none!important}
-.fill{background:color-mix(in srgb,var(--tag) 32%,transparent);border-bottom:1.5px dashed var(--warn);padding:0 3px;border-radius:2px}
-</style>
+@media (pointer:coarse),(max-width:860px){.pad{display:grid}}
 
+.passport{background:var(--paper);border:2px solid var(--ink);border-radius:var(--r-outer);box-shadow:4px 4px 0 var(--ink);display:grid;min-width:0}
+.pp{padding:var(--s4) var(--s5);display:grid;gap:var(--s3)}
+.pp + .pp{border-top:2px dashed var(--line)}
+.pp-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3)}
+.passport h2{font-family:var(--display);font-size:26px}
+.passport h3{font-family:var(--body);font-size:14px;font-weight:700;color:var(--ink)}
+.steps{font-size:14px;color:var(--ink-soft)}
+.steps b{font-family:var(--figure);font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+.meter{display:grid;grid-template-columns:3em 1fr 2.4em;gap:var(--s2);align-items:center;font-size:15px}
+.bar{height:12px;background:var(--paper-deep);border:2px solid var(--ink);border-radius:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok);transform-origin:left center;transition:transform .25s ease-out,background-color .25s}
+#waterBar{background:var(--sky-deep)}
+.bar i[data-level="mid"]{background:var(--warn)}
+.bar i[data-level="low"]{background:var(--no)}
+.meter .v{font-family:var(--figure);font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+.stamps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s2)}
+.stamp{display:grid;justify-items:center;gap:var(--s1);min-width:0}
+.seal{width:44px;height:44px;max-width:100%;border:2px dashed var(--line);border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-size:20px;color:var(--ink-soft);transition:transform .2s ease-out,background-color .2s,color .2s}
+.stamp.on .seal{border:2px solid var(--coral);background:var(--coral-deep);color:var(--paper);transform:rotate(-10deg)}
+.sname{font-size:12px;line-height:1.3;color:var(--ink-soft);text-align:center}
+.log{font-size:15px;line-height:1.65;min-height:5em}
+.log .t{color:var(--ink-soft);font-size:12px;font-family:var(--figure)}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2);font-size:14px}
+.legend li{display:flex;gap:var(--s2);align-items:center}
+.sq{width:22px;height:22px;border-radius:6px;display:inline-grid;place-items:center;color:var(--on-chip);font-size:12px;font-weight:700;flex:none}
+.sq.ok{background:var(--ok)}.sq.warn{background:var(--warn)}.sq.no{background:var(--no)}.sq.ppl{background:var(--ink-soft)}
+.note{margin:0;font-size:13px;line-height:1.7;color:var(--ink);max-width:60em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-<section id="game" class="wide" aria-labelledby="gtitle">
-  <div class="head">
-    <div class="eyebrow"><b>互动小游戏</b><span>约 2 分钟</span></div>
-    <h2 id="gtitle">带它逛三里屯</h2>
-    <p>收集 5 枚“友好印章”，别让它的心情掉到零。每家店的规则都标在门口：绿色欢迎，黄色只放行小型犬，红色宠物止步。试试换成大型犬再走一遍。</p>
-  </div>
-  <div class="stage">
-    <div>
+<div class="page">
+  <header class="top">
+    <h1 id="gtitle">带它逛三里屯</h1>
+    <p>收集五枚友好印章，别让它的心情掉到零。</p>
+  </header>
+
+  <section id="game" class="stage" aria-labelledby="gtitle">
+    <div class="mapcol">
       <div class="mapwrap">
         <canvas id="cv" tabindex="0" aria-label="三里屯街区 3D 示意地图，使用方向键或 WASD 移动"></canvas>
         <div class="overlay" id="ov">
           <div class="card" id="startCard">
-            <h3>今天带谁出门？</h3>
+            <h2>今天带谁出门？</h2>
             <div class="pick" role="radiogroup" aria-label="选择宠物">
               <label><input type="radio" name="pet" id="petSmall" value="small" checked><b>小型犬</b><small>体重 10kg 以下，多数店可以进</small></label>
               <label><input type="radio" name="pet" id="petBig" value="big"><b>大型犬</b><small>更容易口渴，也更容易被拦下</small></label>
@@ -145,43 +138,42 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-si
           <div class="card result" id="endCard" hidden></div>
         </div>
       </div>
-      <div class="pad" style="margin-top:12px" aria-label="方向控制">
-        <button class="u" data-d="0,-1" aria-label="上">↑</button>
-        <button class="l" data-d="-1,0" aria-label="左">←</button>
-        <button class="d" data-d="0,1" aria-label="下">↓</button>
-        <button class="r" data-d="1,0" aria-label="右">→</button>
+      <div class="pad" aria-label="方向控制">
+        <button class="u" data-d="0,-1" aria-label="向上走"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 13l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="l" data-d="-1,0" aria-label="向左走"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13 4l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="d" data-d="0,1" aria-label="向下走"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="r" data-d="1,0" aria-label="向右走"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
     </div>
-    <aside class="side">
-      <div class="box">
-        <h4>状态</h4>
+
+    <aside class="passport" aria-label="逛街护照">
+      <div class="pp">
+        <div class="pp-head"><h2>逛街护照</h2><span class="steps">第 <b id="stepV">0</b> 步</span></div>
         <div class="meter"><span>心情</span><span class="bar"><i id="moodBar"></i></span><span class="v" id="moodV">100</span></div>
         <div class="meter"><span>水分</span><span class="bar"><i id="waterBar"></i></span><span class="v" id="waterV">100</span></div>
-        <div class="meter"><span>步数</span><span></span><span class="v" id="stepV">0</span></div>
       </div>
-      <div class="box">
-        <h4>友好印章</h4>
-        <div class="stamps" id="stamps"></div>
-        <div class="stampnames">水 饮水站 · 袋 拾便袋站 · 咖 咖啡外摆区 · 医 宠物医疗驿站 · 草 宠物草坪</div>
+      <div class="pp">
+        <h3>友好印章</h3>
+        <ul class="stamps" id="stamps"></ul>
       </div>
-      <div class="box">
-        <h4>刚刚发生</h4>
+      <div class="pp">
+        <h3>刚刚发生</h3>
         <div class="log" id="log" aria-live="polite">它在三里屯路边等你出发。</div>
       </div>
-      <div class="box legend">
-        <h4>店门规则</h4>
-        <span><i class="sq" style="background:var(--ok)">欢</i>全店欢迎</span>
-        <span><i class="sq" style="background:var(--warn)">抱</i>小型犬可进，大型犬需推车</span>
-        <span><i class="sq" style="background:var(--no)">禁</i>宠物止步</span>
-        <span><i class="sq" style="background:var(--muted)">人</i>路人，撞到会吓到对方</span>
+      <div class="pp">
+        <h3>店门规则</h3>
+        <ul class="legend">
+          <li><i class="sq ok" aria-hidden="true">欢</i>全店欢迎</li>
+          <li><i class="sq warn" aria-hidden="true">抱</i>小型犬可进，大型犬需推车</li>
+          <li><i class="sq no" aria-hidden="true">禁</i>宠物止步</li>
+          <li><i class="sq ppl" aria-hidden="true">人</i>路人，撞到会吓到对方</li>
+        </ul>
       </div>
     </aside>
-  </div>
+  </section>
+
   <p class="note">地图依据三里屯街区（太古里南区、北区、西区，三里屯路、工体北路一带）的空间关系简化绘制，仅为示意，比例与店铺位置不精确。游戏中的店铺名称与准入规则均为虚构，不代表任何真实商户的政策。</p>
-</section>
-
-
-
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
@@ -348,21 +340,22 @@ function start(size){
 function hud(){
   const m=Math.round(S.mood),w=Math.round(S.water);
   const mb=document.getElementById('moodBar'),wb=document.getElementById('waterBar');
-  mb.style.width=m+'%';wb.style.width=w+'%';
-  mb.style.background=m<30?'var(--no)':m<60?'var(--warn)':'var(--ok)';
-  wb.style.background=w<30?'var(--no)':'var(--accent)';
+  mb.style.transform='scaleX('+(m/100)+')';wb.style.transform='scaleX('+(w/100)+')';
+  mb.dataset.level=m<30?'low':m<60?'mid':'ok';
+  wb.dataset.level=w<30?'low':'ok';
   document.getElementById('moodV').textContent=m;
   document.getElementById('waterV').textContent=w;
   document.getElementById('stepV').textContent=S.steps;
-  document.getElementById('stamps').innerHTML=STAMPS.map(s=>'<span class="stamp'+(S.got.has(s.id)?' on':'')+'" title="'+s.name+'">'+s.ch+'</span>').join('');
+  document.getElementById('stamps').innerHTML=STAMPS.map(s=>'<li class="stamp'+(S.got.has(s.id)?' on':'')+'"><span class="seal" aria-hidden="true">'+s.ch+'</span><span class="sname">'+s.name.replace('宠物','')+'</span></li>').join('');
 }
+S=newState('small');hud();
 
 // ================= 3D =================
-if(!window.THREE){wrap.insertAdjacentHTML('beforeend','<p style="padding:24px">3D 地图没有加载成功，请刷新页面再试。</p>');return;}
+if(!window.THREE){document.getElementById('ov').hidden=true;wrap.insertAdjacentHTML('beforeend','<p class="fallback">3D 地图没有加载成功，请刷新页面再试。</p>');return;}
 const T3=THREE;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let renderer;
-try{renderer=new T3.WebGLRenderer({canvas:cv,antialias:true});}catch(e){wrap.insertAdjacentHTML('beforeend','<p style="padding:24px">你的浏览器暂不支持 3D 地图（WebGL）。</p>');return;}
+try{renderer=new T3.WebGLRenderer({canvas:cv,antialias:true});}catch(e){document.getElementById('ov').hidden=true;wrap.insertAdjacentHTML('beforeend','<p class="fallback">你的浏览器暂不支持 3D 地图（WebGL）。</p>');return;}
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=T3.PCFSoftShadowMap;
 const scene=new T3.Scene();
 const camera=new T3.OrthographicCamera(-1,1,1,-1,0.1,300);
@@ -628,6 +621,5 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',rebuildAll)
 if(document.fonts)document.fonts.ready.then(rebuildAll);
 })();
 </script>
-
 </body>
 </html>
